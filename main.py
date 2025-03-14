@@ -5,88 +5,88 @@ import random
 from datetime import datetime
 import asyncio
 
-# Bot initialisieren
+# Initialize the bot
 intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
 
-# Liste von Capybara-API-Endpunkten
+# List of Capybara API endpoints
 CAPYBARA_API_ENDPOINTS = [
     "https://api.capy.lol/v1/capybara?json=true",
 ]
 
-# Liste von Dog-API-Endpunkten
+# List of Dog API endpoints
 DOG_API_ENDPOINTS = [
     "https://dog.ceo/api/breeds/image/random",
 ]
 
-# Getrennte Listen für Beschreibungen
+# Separate lists for descriptions
 CAPYBARA_DESCRIPTIONS = [
-    "Ein süßes Capybara genießt den Tag!",
-    "Schau mal, wie entspannt dieses Capybara ist!",
-    "Capybara-Chill-Level: Weltmeister!",
-    "Ein flauschiges Capybara nur für dich!",
-    "Dieses Capybara sagt: Alles wird gut!",
-    "Ein Capybara, das dein Herz erobert!",
-    "So süß, dass du es knuddeln möchtest!",
-    "Capybara-Vibes: Pures Glück!",
-    "Dieses Capybara ist bereit für ein Abenteuer!",
-    "Ein Capybara, das dir den Tag versüßt!",
-    "Chillen wie ein Capybara – unschlagbar!",
-    "Ein Capybara, das einfach nur süß ist!",
-    "Capybara-Liebe auf den ersten Blick!",
-    "Dieses Capybara bringt Sonne in dein Leben!",
-    "Ein Capybara, das dir ein Lächeln schenkt!",
-    "Capybara-Magie: Einfach unwiderstehlich!",
-    "Dieses Capybara hat den Entspannungsmodus aktiviert!",
-    "Ein Capybara, das dich zum Träumen bringt!",
-    "Capybara-Freunde machen den Tag besser!",
-    "Dieses Capybara ist der Star des Tages!",
-    "Ein Capybara, das dir die Welt erklärt!",
-    "Capybara-Zeit: Entspannung pur!",
-    "Dieses Capybara hat einen entspannten Tag!",
-    "Ein Capybara, das dich zum Lachen bringt!",
-    "Capybara-Liebe: Einfach unendlich süß!"
+    "A cute capybara enjoying the day!",
+    "Look how relaxed this capybara is!",
+    "Capybara chill level: World champion!",
+    "A fluffy capybara just for you!",
+    "This capybara says: Everything will be fine!",
+    "A capybara that captures your heart!",
+    "So cute you’ll want to cuddle it!",
+    "Capybara vibes: Pure happiness!",
+    "This capybara is ready for an adventure!",
+    "A capybara that sweetens your day!",
+    "Chilling like a capybara – unbeatable!",
+    "A capybara that’s simply adorable!",
+    "Capybara love at first sight!",
+    "This capybara brings sunshine into your life!",
+    "A capybara that gives you a smile!",
+    "Capybara magic: Simply irresistible!",
+    "This capybara has relaxation mode activated!",
+    "A capybara that makes you dream!",
+    "Capybara friends make the day better!",
+    "This capybara is the star of the day!",
+    "A capybara that explains the world to you!",
+    "Capybara time: Pure relaxation!",
+    "This capybara is having a chill day!",
+    "A capybara that makes you laugh!",
+    "Capybara love: Endlessly cute!"
 ]
 
 DOG_DESCRIPTIONS = [
-    "Ein treuer Hund genießt den Tag!",
-    "Schau dir diesen verspielten Hund an!",
-    "Hund-Charm: Unwiderstehlich!",
-    "Ein flauschiger Hund nur für dich!",
-    "Dieser Hund bringt Freude ins Leben!",
-    "Ein Hund, der dein Herz stiehlt!",
-    "So süß, dass du ihn streicheln willst!",
-    "Hund-Vibes: Volle Energie!",
-    "Dieser Hund ist bereit für Spaß!",
-    "Ein Hund, der deinen Tag erhellt!",
-    "Spielen wie ein Hund – unvergesslich!",
-    "Ein Hund, der einfach liebenswert ist!",
-    "Hund-Liebe auf den ersten Blick!",
-    "Dieser Hund strahlt Glück aus!",
-    "Ein Hund, der dich zum Lächeln bringt!",
-    "Hund-Magie: Einfach wunderbar!",
-    "Dieser Hund hat den Spielmodus an!",
-    "Ein Hund, der dich begeistert!",
-    "Hund-Freunde machen alles besser!",
-    "Dieser Hund ist der Star des Tages!",
-    "Ein Hund, der die Welt erobert!",
-    "Hund-Zeit: Freude pur!",
-    "Dieser Hund hat einen tollen Tag!",
-    "Ein Hund, der dich zum Lachen bringt!"
+    "A loyal dog enjoying the day!",
+    "Check out this playful dog!",
+    "Dog charm: Irresistible!",
+    "A fluffy dog just for you!",
+    "This dog brings joy to life!",
+    "A dog that steals your heart!",
+    "So cute you’ll want to pet it!",
+    "Dog vibes: Full of energy!",
+    "This dog is ready for fun!",
+    "A dog that brightens your day!",
+    "Playing like a dog – unforgettable!",
+    "A dog that’s simply lovable!",
+    "Dog love at first sight!",
+    "This dog radiates happiness!",
+    "A dog that makes you smile!",
+    "Dog magic: Simply wonderful!",
+    "This dog has play mode on!",
+    "A dog that excites you!",
+    "Dog friends make everything better!",
+    "This dog is the star of the day!",
+    "A dog that conquers the world!",
+    "Dog time: Pure joy!",
+    "This dog is having a great day!",
+    "A dog that makes you laugh!"
 ]
 
-# Funktion für Aktivitäten (Statusmeldungen)
+# Function for activities (status messages)
 def get_activities():
     return [
         discord.Activity(type=discord.ActivityType.watching, name="created by Jonesyyy"),
         discord.Activity(type=discord.ActivityType.watching, name="Capybaras"),
         discord.Activity(type=discord.ActivityType.watching, name="Capycord 💕"),
-        discord.Activity(type=discord.ActivityType.watching, name="Hunde 🐶")
+        discord.Activity(type=discord.ActivityType.watching, name="Dogs 🐶")
     ]
 
-# Funktion zum zyklischen Wechseln des Status
+# Function to cycle through status updates
 async def update_status():
     activities = get_activities()
     while True:
@@ -96,16 +96,16 @@ async def update_status():
 
 @client.event
 async def on_ready():
-    print(f'Eingeloggt als {client.user}')
+    print(f'Logged in as {client.user}')
     try:
         synced = await tree.sync()
-        print(f"Befehle synchronisiert: {len(synced)}")
+        print(f"Commands synchronized: {len(synced)}")
     except Exception as e:
-        print(f"Fehler bei der Synchronisierung: {e}")
+        print(f"Error during synchronization: {e}")
 
     client.loop.create_task(update_status())
 
-# Funktion zum Abrufen eines Capybara-Bildes von der API
+# Function to fetch a capybara image from the API
 async def get_capybara_image():
     api_url = random.choice(CAPYBARA_API_ENDPOINTS)
     async with aiohttp.ClientSession() as session:
@@ -118,10 +118,10 @@ async def get_capybara_image():
                     return None
                 return None
         except Exception as e:
-            print(f"Fehler bei API-Aufruf {api_url}: {e}")
+            print(f"Error calling API {api_url}: {e}")
             return None
 
-# Funktion zum Abrufen eines Hundebildes von der API
+# Function to fetch a dog image from the API
 async def get_dog_image():
     api_url = random.choice(DOG_API_ENDPOINTS)
     async with aiohttp.ClientSession() as session:
@@ -134,21 +134,21 @@ async def get_dog_image():
                     return None
                 return None
         except Exception as e:
-            print(f"Fehler bei API-Aufruf {api_url}: {e}")
+            print(f"Error calling API {api_url}: {e}")
             return None
 
-# Slash-Command für Capybara-Bilder
+# Slash command for capybara images
 @tree.command(
     name="capybara",
-    description="Zeigt ein süßes Capybara!"
+    description="Shows a cute capybara!"
 )
 async def capybara(interaction: discord.Interaction):
     if interaction.guild is None:
-        await interaction.response.send_message("Du nutzt den Bot in einer DM! Hier ist dein Capybara:", ephemeral=False)
+        await interaction.response.send_message("You're using the bot in a DM! Here's your capybara:", ephemeral=False)
     else:
         if not interaction.channel.permissions_for(interaction.guild.me).send_messages:
             await interaction.response.send_message(
-                "Ich habe keine Berechtigung, in diesem Kanal Nachrichten zu senden. Bitte gib mir die entsprechenden Berechtigungen!",
+                "I don’t have permission to send messages in this channel. Please give me the appropriate permissions!",
                 ephemeral=True
             )
             return
@@ -157,9 +157,9 @@ async def capybara(interaction: discord.Interaction):
     image_url = await get_capybara_image()
     
     if image_url:
-        random_desc = random.choice(CAPYBARA_DESCRIPTIONS)  # Nur Capybara-Beschreibungen
+        random_desc = random.choice(CAPYBARA_DESCRIPTIONS)  # Only capybara descriptions
         embed = discord.Embed(
-            title="Süßes Capybara! 🦫",
+            title="Cute Capybara! 🦫",
             description=random_desc,
             color=discord.Color.orange(),
             timestamp=discord.utils.utcnow()
@@ -168,20 +168,20 @@ async def capybara(interaction: discord.Interaction):
         embed.set_footer(text="Powered by Jonesyyy ✘ Capycord")
         await interaction.followup.send(embed=embed) if interaction.response.is_done() else await interaction.response.send_message(embed=embed)
     else:
-        await interaction.followup.send("Sorry, konnte kein Capybara-Bild von capy.lol laden! Versuche es nochmal.", ephemeral=True) if interaction.response.is_done() else await interaction.response.send_message("Sorry, konnte kein Capybara-Bild von capy.lol laden! Versuche es nochmal.", ephemeral=True)
+        await interaction.followup.send("Sorry, couldn’t load a capybara image from capy.lol! Try again.", ephemeral=True) if interaction.response.is_done() else await interaction.response.send_message("Sorry, couldn’t load a capybara image from capy.lol! Try again.", ephemeral=True)
 
-# Slash-Command für Hundebilder
+# Slash command for dog images
 @tree.command(
     name="dog",
-    description="Zeigt ein süßes Hundebild!"
+    description="Shows a cute dog image!"
 )
 async def dog(interaction: discord.Interaction):
     if interaction.guild is None:
-        await interaction.response.send_message("Du nutzt den Bot in einer DM! Hier ist dein Hund:", ephemeral=False)
+        await interaction.response.send_message("You're using the bot in a DM! Here's your dog:", ephemeral=False)
     else:
         if not interaction.channel.permissions_for(interaction.guild.me).send_messages:
             await interaction.response.send_message(
-                "Ich habe keine Berechtigung, in diesem Kanal Nachrichten zu senden. Bitte gib mir die entsprechenden Berechtigungen!",
+                "I don’t have permission to send messages in this channel. Please give me the appropriate permissions!",
                 ephemeral=True
             )
             return
@@ -190,44 +190,44 @@ async def dog(interaction: discord.Interaction):
     image_url = await get_dog_image()
     
     if image_url:
-        random_desc = random.choice(DOG_DESCRIPTIONS)  # Nur Hund-Beschreibungen
+        random_desc = random.choice(DOG_DESCRIPTIONS)  # Only dog descriptions
         embed = discord.Embed(
-            title="Süßer Hund! 🐶",
+            title="Cute Dog! 🐶",
             description=random_desc,
-            color=discord.Color.from_rgb(139, 69, 19),  # Braune Farbe für Hunde
+            color=discord.Color.from_rgb(139, 69, 19),  # Brown color for dogs
             timestamp=discord.utils.utcnow()
         )
         embed.set_image(url=image_url)
         embed.set_footer(text="Powered by Jonesyyy ✘ Capycord")
         await interaction.followup.send(embed=embed) if interaction.response.is_done() else await interaction.response.send_message(embed=embed)
     else:
-        await interaction.followup.send("Sorry, konnte kein Hundebild von dog.ceo laden! Versuche es nochmal.", ephemeral=True) if interaction.response.is_done() else await interaction.response.send_message("Sorry, konnte kein Hundebild von dog.ceo laden! Versuche es nochmal.", ephemeral=True)
+        await interaction.followup.send("Sorry, couldn’t load a dog image from dog.ceo! Try again.", ephemeral=True) if interaction.response.is_done() else await interaction.response.send_message("Sorry, couldn’t load a dog image from dog.ceo! Try again.", ephemeral=True)
 
-# Slash-Command für Bot-Informationen
+# Slash command for bot information
 @tree.command(
     name="info",
-    description="Zeigt Informationen über den Capybara Bot!"
+    description="Shows information about the Capybara Bot!"
 )
 async def info(interaction: discord.Interaction):
     if interaction.guild is None:
-        await interaction.response.send_message("Du nutzt den Bot in einer DM! Hier sind die Infos:", ephemeral=False)
+        await interaction.response.send_message("You're using the bot in a DM! Here’s the info:", ephemeral=False)
     else:
         if not interaction.channel.permissions_for(interaction.guild.me).send_messages:
             await interaction.response.send_message(
-                "Ich habe keine Berechtigung, in diesem Kanal Nachrichten zu senden. Bitte gib mir die entsprechenden Berechtigungen!",
+                "I don’t have permission to send messages in this channel. Please give me the appropriate permissions!",
                 ephemeral=True
             )
             return
         await interaction.response.defer()
 
     embed = discord.Embed(
-        title="Über den Capybara Bot 🦫",
+        title="About the Capybara Bot 🦫",
         description=(
-            "Ein Discordbot, der dir zufällige Capybarabilder und Hundebilder zeigt! "
-            "Die Capybarabilder stammen aus der [Capycord-API](https://capy.lol) und die Hundebilder aus der [Dog CEO API](https://dog.ceo). "
-            "Der Bot wurde von Jonesyyy speziell für Capycord entwickelt.\n\n"
-            "Nutze `/capybara` für Capybaras, `/dog` für Hunde!\n"
-            f"**Einladungslink**: [Hier klicken](https://discord.com/oauth2/authorize?client_id={client.user.id}&scope=bot+applications.commands&permissions=2147483648)"
+            "A Discord bot that shows you random capybara and dog images! "
+            "The capybara images come from the [Capycord API](https://capy.lol) and the dog images from the [Dog CEO API](https://dog.ceo). "
+            "The bot was developed by Jonesyyy specifically for Capycord.\n\n"
+            "Use `/capybara` for capybaras, `/dog` for dogs!\n"
+            f"**Invite Link**: [Click here](https://discord.com/oauth2/authorize?client_id={client.user.id}&scope=bot+applications.commands&permissions=2147483648)"
         ),
         color=discord.Color.orange(),
         timestamp=discord.utils.utcnow()
@@ -236,6 +236,5 @@ async def info(interaction: discord.Interaction):
     
     await interaction.followup.send(embed=embed) if interaction.response.is_done() else await interaction.response.send_message(embed=embed)
 
-
-# Bot starten
-client.run('MTM1MDExNzM2NzEzMjQ1NDkyNg.G1RNSx.UdH4UO1nfbLA89hEAFHtq3rvXkAt1pDSraDmu0')
+# Start the bot
+client.run('YOUR_BOT_TOKEN')  # It would be better to create a .env file for safety standards
