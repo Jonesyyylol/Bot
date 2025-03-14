@@ -237,4 +237,4 @@ async def info(interaction: discord.Interaction):
     await interaction.followup.send(embed=embed) if interaction.response.is_done() else await interaction.response.send_message(embed=embed)
 
 # Start the bot
-client.run('YOUR_BOT_TOKEN')  # It would be better to create a .env file for safety standards
+client.run('YOUR_BOT_TOKEN')  # It would be better to create a .env file for safety standards and security
