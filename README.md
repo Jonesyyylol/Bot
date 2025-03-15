@@ -88,6 +88,6 @@ This project is licensed under the [MIT License](LICENSE). See the `LICENSE` fil
 - **Powered by**: Capycord
 
 ## Contact
-For questions or support, reach out via Discord (add your Discord handle here) or open an issue on GitHub.
+For questions or support, reach out via [Discord](https://discord.com/users/801011337274589234) or open an issue on GitHub.
 
 ---
