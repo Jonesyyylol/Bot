@@ -23,7 +23,7 @@ A fun and simple Discord bot that fetches random images of capybaras and dogs us
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/jonesyyylol/bot.git
-   cd capybara-bot
+   cd bot
    ```
 
 2. **Install Dependencies**:
