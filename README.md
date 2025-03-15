@@ -1,7 +1,3 @@
-Hier ist eine README-Datei auf Englisch, die für dein GitHub-Repository geeignet ist. Sie enthält eine Beschreibung des Projekts, Installationsanweisungen, Nutzungshinweise und weitere relevante Informationen. Ich habe sie so gestaltet, dass sie professionell und übersichtlich wirkt:
-
----
-
 # Capybara Bot
 
 A fun and simple Discord bot that fetches random images of capybaras and dogs using public APIs. Built with Python and the `discord.py` library, this bot brings cute animal vibes to your Discord server!
